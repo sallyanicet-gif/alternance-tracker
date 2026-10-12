@@ -1,0 +1,76 @@
+# ============================================================
+#  Configuration du suivi d'alternances (sans secrets !)
+#  Les clés API et mots de passe sont dans les variables
+#  d'environnement / GitHub Secrets, jamais ici.
+# ============================================================
+
+# Mots-clés : une offre est gardée si l'un d'eux apparaît.
+# La recherche ignore les majuscules, les accents et les tirets
+# ("Développeur front-end" = "developpeur front end").
+keywords:
+  - graphiste
+  - infographiste
+  - PAO
+  - webdesigner
+  - community manager
+  - monteur vidéo
+  - motion design
+  - intégrateur web
+  - développeur front-end
+  - communication digitale
+  - multimédia
+  # Idées à décommenter si tu veux élargir :
+  # - frontend
+  # - web designer
+  # - monteur vidéaste
+  # - UI designer
+  # - chargé de communication
+
+# Où chercher les mots-clés : "title" (titre seul, plus strict)
+# ou "title_and_description" (titre + description, plus large).
+search_in: title_and_description
+
+# Types de contrat acceptés (mots présents dans le libellé du contrat).
+contract_types:
+  - apprentissage
+  - professionnalisation
+
+guadeloupe:
+  # Les offres dont le code postal ne commence pas par ce préfixe sont ignorées.
+  postal_prefix: "971"
+  # Points de recherche pour La Bonne Alternance (lat/lon) : ils couvrent l'archipel.
+  radius_km: 30
+  search_points:
+    - {name: "Pointe-à-Pitre / Les Abymes", lat: 16.2415, lon: -61.5331}
+    - {name: "Basse-Terre", lat: 15.9958, lon: -61.7267}
+    - {name: "Deshaies / Nord Basse-Terre", lat: 16.3055, lon: -61.7954}
+    - {name: "Marie-Galante (Grand-Bourg)", lat: 15.8845, lon: -61.3147}
+
+lba:
+  enabled: true
+  # Codes ROME envoyés à l'API (5 maximum par requête, découpés automatiquement).
+  # ⚠ À vérifier : le ROME a été refondu (ROME 4.0). Si l'API refuse un code,
+  # le journal du programme l'indique ; corrige-le ici.
+  romes:
+    - E1104   # Conception de contenus multimédias
+    - E1205   # Réalisation de contenus multimédias
+    - E1101   # Animation de site multimédia (community manager)
+    - E1103   # Communication
+    - E1401   # Développement et promotion publicitaire
+    - M1805   # Études et développement informatique
+  romes_per_request: 5
+  # Entreprises "à fort potentiel d'embauche" (sans offre publiée) :
+  # utiles pour des candidatures spontanées. Section séparée dans l'email.
+  include_recruteurs: true
+  # Nombre max d'entreprises affichées dans l'email (toutes sont gardées
+  # dans offers.db et visibles avec le CLI).
+  max_recruteurs_in_email: 15
+
+france_travail:
+  # Source optionnelle : ignorée si FT_CLIENT_ID / FT_CLIENT_SECRET sont absents.
+  enabled: true
+  departement: "971"
+  # Si la recherche automatique des codes de contrat échoue, tu peux les
+  # écrire ici à la main (voir README). Laisse vide sinon.
+  nature_contrat_codes: []
+  max_results: 1000
